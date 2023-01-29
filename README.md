@@ -20,7 +20,7 @@ aims to eliminate that, while providing a fun experience for users.
 ___
 - As a user, I want to be able to add a card to a specific groups and decks </br>
 - As a user, I want to be able to make new groups and decks </br>
-- As a user, I want to be able to view the current decks, groups, and their associated cards pairs </br>
+- As a user, I want to be able to view the current decks, groups, and cards pairs </br>
 - As a user, I want to be able to answer a card given some possible choices </br>
 - As a user, I want to be able to delete a card </br>
 - As a user, I want to be able to see the number of remaining cards that I need to do for the day
