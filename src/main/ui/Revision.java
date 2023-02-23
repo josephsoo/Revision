@@ -173,6 +173,7 @@ public class Revision {
         allDeckNames.set(i, newName);
     }
 
+    // MODIFIES: deck
     // EFFECTS: allows user to review if deck is not empty
     private void reviewDeck(Deck deck) {
         if (deck.isEmpty()) {

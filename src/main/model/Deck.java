@@ -14,7 +14,7 @@ public class Deck {
     // EFFECTS: constructs an empty deck with no cards and a given name
     public Deck(String deckName) {
         this.deckName = deckName;
-        cards = new ArrayList<Card>();
+        cards = new ArrayList<>();
     }
 
 
