@@ -18,9 +18,7 @@ aims to eliminate that, while providing a fun experience for users.
 
 ## User Stories
 ___
-- As a user, I want to be able to add a card to a specific groups and decks </br>
-- As a user, I want to be able to make new groups and decks </br>
-- As a user, I want to be able to view the current decks, groups, and cards pairs </br>
-- As a user, I want to be able to answer a card given some possible choices </br>
-- As a user, I want to be able to delete a card </br>
-- As a user, I want to be able to see the number of remaining cards that I need to do for the day
+- As a user, I want to be able to make a new deck
+- As a user, I want to be able to add a card to a deck
+- As a user, I want to be able to answer a card's question given some possible answer choices
+- As a user, I want to be able to rename a deck

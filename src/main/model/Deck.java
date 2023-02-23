@@ -34,9 +34,9 @@ public class Deck {
             cards.add(card);
         }
     }
-    //REQUIRES: There is more than one card in the deck
-    // EFFECTS: Returns 4 random answers from the deck, more if there is
 
+    // REQUIRES: There is more than one card in the deck
+    // EFFECTS: Returns 4 random answers from the deck, more if there is
     public ArrayList<String> getAnswers() {
         ArrayList<String> answers = new ArrayList<>();
         if (cards.size() < NUMANSWERS) {
@@ -72,6 +72,7 @@ public class Deck {
         this.addCard(cardAnswered);
     }
 
+    // EFFECTS: Returns true if the answer is correct (it matches the answer of the first card)
     public boolean isCorrectAnswer(String answer) {
         return answer.equals(cards.get(0).getAnswer());
     }
@@ -102,6 +103,7 @@ public class Deck {
     public void removeCard(Card cardToRemove) {
         cards.remove(cardToRemove);
     }
+
 
     // REQUIRES: there is at least one question in the deck
     // EFFECTS: returns the first question in the deck (the card being reviewed)

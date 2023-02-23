@@ -78,6 +78,7 @@ public class Revision {
         System.out.println("\tn -> rename deck");
         System.out.println("\tr -> review deck");
         System.out.println("\ta -> add card");
+        System.out.println("\tdc -> delete card");
         System.out.println("\tb -> back");
     }
 
@@ -127,6 +128,7 @@ public class Revision {
             }
         }
     }
+
 
     private void deckCardAdder(Deck deck) {
         System.out.println("Press b to go back");
