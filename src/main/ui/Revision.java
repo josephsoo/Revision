@@ -12,9 +12,6 @@ public class Revision {
     private Scanner input;
     ArrayList<String> allDeckNames = new ArrayList<>();
 
-    Deck currentDeck;
-    int currentDeckIndex;
-
     // EFFECTS: Runs the Revision application
     public Revision() {
         runRevision();
