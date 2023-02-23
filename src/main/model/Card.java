@@ -50,16 +50,14 @@ public class Card {
         this.timeRemaining = ease;
     }
 
-    /*
-    REQUIRES: TODO
-    MODIFIES: this
-    EFFECTS: Changes the question to newQuestion
-     */
+
+    // MODIFIES: this
+    // EFFECTS: Changes the question to newQuestion
+
     public void changeQuestion(String newQuestion) {
         this.question = newQuestion;
     }
 
-    // REQUIRES: TODO
     // MODIFIES: this
     // EFFECTS: Changes the answer to newAnswer
 
