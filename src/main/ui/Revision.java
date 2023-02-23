@@ -9,11 +9,11 @@ import java.util.Scanner;
 public class Revision {
 
     ArrayList<Deck> decks = new ArrayList<Deck>();
-    Deck currentDeck;
     private Scanner input;
     ArrayList<String> allDeckNames = new ArrayList<>();
 
-
+    Deck currentDeck;
+    int currentDeckIndex;
     // EFFECTS: Runs the Revision application
     public Revision() {
         runRevision();
@@ -57,6 +57,7 @@ public class Revision {
         }
     }
 
+    // MODIFIES: this
     // EFFECTS: initializes the system
     private void init() {
         input = new Scanner(System.in);
@@ -71,7 +72,7 @@ public class Revision {
         System.out.println("\tq -> quit");
     }
 
-    // EFFECTS: displays menu of options to user
+    // EFFECTS: displays menu of options for the deck to user
     private void displayDeckMenu() {
         System.out.println("\nSelect from:");
         System.out.println("\td -> delete deck");
@@ -83,6 +84,7 @@ public class Revision {
     }
 
 
+    // MODIFIES: this
     // EFFECTS: allows the user to do something with a deck
     private void doSelectDeck() {
         if (decks.size() == 0) {
@@ -102,8 +104,12 @@ public class Revision {
         }
     }
 
+
+
     // Requires: name is a name of a deck in decks
+    // MODIFIES: this
     // EFFECTS: allows the user select between rename, review, or delete the deck
+    @SuppressWarnings("methodlength")
     public void processDeck(String name) {
         displayDeckMenu();
         String command;
@@ -141,7 +147,8 @@ public class Revision {
         }
     }
 
-
+    // MODIFIES: deck
+    // EFFECTS: allows the user to add card to a given deck, and quit if needed
     private void deckCardAdder(Deck deck) {
         System.out.println("Press b to go back");
         while (true) {
@@ -179,7 +186,7 @@ public class Revision {
 
     // REQUIRES: deck has at least one card
     // MODIFIES: deck
-    // EFFECTS: allows the user to review the deck
+    // EFFECTS: allows the user to review the deck by giving answers to questions
     private void deckPractice(Deck deck) {
         System.out.println("Press b to go back");
         while (true) {

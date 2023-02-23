@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.concurrent.ThreadLocalRandom;
 
-// A Deck, which can be used to store cards
+// Represents a Deck, which can be used to store Cards
 public class Deck {
     private ArrayList<Card> cards;
     private String deckName;
@@ -19,7 +19,7 @@ public class Deck {
 
 
     // EFFECTS: schedules the Card into cards by inserting it into the appropriate slot based on its time remaining
-     // MODIFIES: this
+    // MODIFIES: this
     public void addCard(Card card) {
         boolean inserted = false;
         int index = 0;
@@ -61,7 +61,8 @@ public class Deck {
     }
 
     // REQUIRES: Deck is not empty (there is at least one card in the deck)
-    // EFFECTS: updates and reschedules the card into the deck depending on if it passed or not
+    // EFFECTS: updates and reschedules the first card into the deck, and updates all the other card's time remaining
+    // MODIFIES: this
     public void rescheduleDeck(boolean isPassed) {
         Card cardAnswered = cards.get(0);
         cards.remove(0);
@@ -106,7 +107,7 @@ public class Deck {
     }
 
 
-    // REQUIRES: there is at least one question in the deck
+    // REQUIRES: there is at least one Card in the deck
     // EFFECTS: returns the first question in the deck (the card being reviewed)
     public String getQuestion() {
         String question = cards.get(0).getQuestion();

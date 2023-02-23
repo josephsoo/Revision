@@ -22,7 +22,7 @@ class CardTest {
     @Test
     public void subtractTimeRemainingTest()
     {
-        assertEquals(card1.startingEase , card1.getTimeRemaining());
+        assertEquals(card1.getStartingEase() , card1.getTimeRemaining());
         card1.subtractTimeRemaining(card1.getTimeRemaining() - 1);
         assertEquals(1, card1.getTimeRemaining());
     }
@@ -30,11 +30,11 @@ class CardTest {
     @Test
     public void updateCardTest() {
         card1.updateCard(true);
-        assertEquals((int) (card1.startingEase* card1.passedMultiplier),  card1.getTimeRemaining());
-        assertEquals((int) (card1.startingEase* card1.passedMultiplier),  card1.getEase());
+        assertEquals((int) (card1.getStartingEase()* card1.passedMultiplier),  card1.getTimeRemaining());
+        assertEquals((int) (card1.getStartingEase()* card1.passedMultiplier),  card1.getEase());
         card1.updateCard(false);
-        assertEquals((int) (card1.startingEase* card1.passedMultiplier* card1.failedMultiplier),  card1.getTimeRemaining());
-        assertEquals((int) (card1.startingEase* card1.passedMultiplier* card1.failedMultiplier),  card1.getEase());
+        assertEquals((int) (card1.getStartingEase()* card1.passedMultiplier* card1.failedMultiplier),  card1.getTimeRemaining());
+        assertEquals((int) (card1.getStartingEase()* card1.passedMultiplier* card1.failedMultiplier),  card1.getEase());
     }
 
 

@@ -20,4 +20,4 @@ ___
 - As a user, I want to be able to add a card to a deck
 - As a user, I want to be able to answer a card's question given some possible answer choices from that deck
 - As a user, I want to be able to rename a deck
-- As a user, I want to be able to see the cards in a deck
+- As a user, I want to be able to view the cards in a deck

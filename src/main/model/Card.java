@@ -1,6 +1,6 @@
 package model;
 
-// A card, with a question, answer, ease, and time remaining
+// Represents a card, with a question, answer, ease, and time remaining
 public class Card {
     private String question;
     private String answer;
@@ -8,7 +8,7 @@ public class Card {
     private int timeRemaining;
     private int id;
     private static int nextCardID = 0;
-    protected final int startingEase = 100;
+    private final int startingEase = 100;
     protected final double passedMultiplier = 1.1;
     protected final double failedMultiplier = 0.9;
 
@@ -49,14 +49,12 @@ public class Card {
 
     // MODIFIES: this
     // EFFECTS: Changes the question to newQuestion
-
     public void changeQuestion(String newQuestion) {
         this.question = newQuestion;
     }
 
     // MODIFIES: this
     // EFFECTS: Changes the answer to newAnswer
-
     public void changeAnswer(String newAnswer) {
         this.answer = newAnswer;
     }
@@ -80,7 +78,6 @@ public class Card {
     public int getId() {
         return this.id;
     }
-
 
     public int getStartingEase() {
         return this.startingEase;

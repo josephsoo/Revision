@@ -68,8 +68,8 @@ class DeckTest {
         card1.updateCard(true);
         card3.updateCard(false);
         deck1.addCard(card1);
-        deck1.addCard(card2);
         deck1.addCard(card3);
+        deck1.addCard(card2);
         ArrayList<Card> deck1Cards = new ArrayList<Card>();
         deck1Cards = deck1.getAllCards();
         assertEquals(deck1Cards.get(0), card3);
