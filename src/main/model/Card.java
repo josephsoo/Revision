@@ -36,7 +36,6 @@ public class Card {
     }
 
     /*
-    REQUIRES: multiplier > 0
     MODIFIES: this
     EFFECTS: updates the ease and the time remaining using the multiplier
      */

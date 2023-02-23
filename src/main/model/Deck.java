@@ -73,7 +73,7 @@ public class Deck {
     }
 
     public boolean isCorrectAnswer(String answer) {
-        return answer.contains(cards.get(0).getAnswer());
+        return answer.equals(cards.get(0).getAnswer());
     }
 
     // EFFECTS: Returns the name of the deck

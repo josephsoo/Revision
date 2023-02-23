@@ -46,6 +46,21 @@ class DeckTest {
     }
 
     @Test
+    public void isCorrectAnswerTest() {
+        card1 = new Card("q1", "a1");
+        card2 = new Card("q2", "a2");
+        card3 = new Card("q3", "a3");
+        deck1.addCard(card1);
+        deck1.addCard(card2);
+        deck1.addCard(card3);
+        assertTrue(deck1.isCorrectAnswer("a1"));
+        assertFalse(deck1.isCorrectAnswer("a2"));
+        deck1.rescheduleDeck(true);
+        assertTrue(deck1.isCorrectAnswer("a2"));
+        assertFalse(deck1.isCorrectAnswer("a1"));
+    }
+
+    @Test
     public void addCardsDifferentScheduleTest() {
         card1 = new Card("q1", "a1");
         card2 = new Card("q2", "a2");
@@ -135,7 +150,6 @@ class DeckTest {
         deck1.addCard(card3);
         deck1.addCard(card4);
         deck1.addCard(card5);
-
         assertEquals("q1", deck1.getQuestion());
     }
 
@@ -156,6 +170,7 @@ class DeckTest {
         assertEquals(card2, deck1.getAllCards().get(0));
         int expectedEase = (int) (card1.getStartingEase()*card1.passedMultiplier);
         assertEquals(expectedEase, card1.getEase());
+        int expectedTimeRemaining = 0;
+        assertEquals(expectedTimeRemaining, card2.getTimeRemaining());
     }
-
 }

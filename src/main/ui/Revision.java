@@ -165,7 +165,7 @@ public class Revision {
 
     // REQUIRES: deck has at least one card
     // MODIFIES: deck
-    // EFFEECTS: allows the user to review the deck
+    // EFFECTS: allows the user to review the deck
     private void deckPractice(Deck deck) {
         System.out.println("Press b to go back");
         Boolean keepGoing = true;
@@ -202,7 +202,7 @@ public class Revision {
     }
 
     //EFFECTS: deletes the deck at index i
-    // REQUIRES: i is a valid index of decks
+    // REQUIRES: i is a valid index in decks
     // MODIFIES: this
     private void deleteDeck(int i) {
         allDeckNames.remove(i);
