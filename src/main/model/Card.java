@@ -58,11 +58,11 @@ public class Card {
     public void changeQuestion(String newQuestion) {
         this.question = newQuestion;
     }
-    /*
-    REQUIRES: TODO
-    MODIFIES: this
-    EFFECTS: Changes the answer to newAnswer
-     */
+
+    // REQUIRES: TODO
+    // MODIFIES: this
+    // EFFECTS: Changes the answer to newAnswer
+
     public void changeAnswer(String newAnswer) {
         this.answer = newAnswer;
     }
@@ -86,7 +86,10 @@ public class Card {
     public int getId() {
         return this.id;
     }
-    
-    
+
+
+    public int getStartingEase() {
+        return this.startingEase;
+    }
 }
 
