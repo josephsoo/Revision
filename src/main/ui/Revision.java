@@ -78,7 +78,7 @@ public class Revision {
         System.out.println("\tn -> rename deck");
         System.out.println("\tr -> review deck");
         System.out.println("\ta -> add card");
-        System.out.println("\tdc -> delete card");
+        System.out.println("\ts -> see all cards");
         System.out.println("\tb -> back");
     }
 
@@ -102,6 +102,7 @@ public class Revision {
         }
     }
 
+    // Requires: name is a name of a deck in decks
     // EFFECTS: allows the user select between rename, review, or delete the deck
     public void processDeck(String name) {
         displayDeckMenu();
@@ -123,9 +124,20 @@ public class Revision {
                 break;
             } else if (command.equals("a")) {
                 deckCardAdder(deck);
+            } else if (command.equals("s")) {
+                printAllCards(deck);
             } else {
                 keepGoing = true;
             }
+        }
+    }
+
+    // EFFECTS: Prints every card's question, answer, and id
+    private void printAllCards(Deck deck) {
+        for (Card card: deck.getAllCards()) {
+            System.out.println("Question: " + card.getQuestion());
+            System.out.println("Answer: " + card.getAnswer());
+            System.out.println("ID: " + card.getId() + "\n");
         }
     }
 
@@ -170,12 +182,11 @@ public class Revision {
     // EFFECTS: allows the user to review the deck
     private void deckPractice(Deck deck) {
         System.out.println("Press b to go back");
-        Boolean keepGoing = true;
-        while (keepGoing) {
+        while (true) {
             printQuestionsAndAnswers(deck);
             String answer = input.next();
             if (answer.equals("b")) {
-                keepGoing = false;
+                break;
             } else {
                 Boolean firstTry = deck.isCorrectAnswer(answer);
                 Boolean passed = firstTry;
@@ -203,7 +214,7 @@ public class Revision {
         System.out.println("\nType in your answer");
     }
 
-    //EFFECTS: deletes the deck at index i
+    // EFFECTS: deletes the deck at index i
     // REQUIRES: i is a valid index in decks
     // MODIFIES: this
     private void deleteDeck(int i) {

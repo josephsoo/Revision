@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.concurrent.ThreadLocalRandom;
 
+// A Deck, which can be used to store cards
 public class Deck {
     private ArrayList<Card> cards;
     private String deckName;

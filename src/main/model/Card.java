@@ -1,9 +1,6 @@
 package model;
 
-/*
-Represents a card
- */
-
+// A card, with a question, answer, ease, and time remaining
 public class Card {
     private String question;
     private String answer;
