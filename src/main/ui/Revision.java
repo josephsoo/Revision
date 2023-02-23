@@ -14,6 +14,7 @@ public class Revision {
 
     Deck currentDeck;
     int currentDeckIndex;
+
     // EFFECTS: Runs the Revision application
     public Revision() {
         runRevision();
