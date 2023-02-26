@@ -107,7 +107,6 @@ public class Revision {
     // Requires: name is a name of a deck in decks
     // MODIFIES: this (by calling methods that modify this)
     // EFFECTS: allows the user select between rename, review, or delete the deck
-    @SuppressWarnings("methodlength")
     public void processDeck(String name) {
         displayDeckMenu();
         String command;
