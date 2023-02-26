@@ -17,7 +17,6 @@ public class Deck {
         cards = new ArrayList<>();
     }
 
-
     // EFFECTS: schedules the Card into cards by inserting it into the appropriate slot based on its time remaining
     // MODIFIES: this
     public void addCard(Card card) {
