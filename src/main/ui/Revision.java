@@ -6,6 +6,8 @@ import model.Deck;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+// Spaced repetition flashcard application inspired by TellerApp https://github.students.cs.ubc.ca/CPSC210/TellerApp
+
 public class Revision {
 
     ArrayList<Deck> decks = new ArrayList<Deck>();
