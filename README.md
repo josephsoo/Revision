@@ -19,5 +19,6 @@ aims to eliminate that, while providing a fun experience for users.
 ___
 - As a user, I want to be able to add a card to a deck
 - As a user, I want to be able to answer a card's question given some possible answer choices from that deck
+- As a user, I want to see cards that I answered wrong more often
 - As a user, I want to be able to rename a deck
 - As a user, I want to be able to view the cards in a deck
