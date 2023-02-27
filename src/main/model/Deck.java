@@ -36,7 +36,7 @@ public class Deck {
     }
 
     // REQUIRES: There is more than one card in the deck
-    // EFFECTS: Returns 4 random answers from the deck, more if there is
+    // EFFECTS: Returns up to 4 random answers from the deck (will return less if less than 4 cards in deck)
     public ArrayList<String> getAnswers() {
         ArrayList<String> answers = new ArrayList<>();
         if (cards.size() < NUMANSWERS) {
@@ -60,7 +60,7 @@ public class Deck {
     }
 
     // REQUIRES: Deck is not empty (there is at least one card in the deck)
-    // EFFECTS: updates and reschedules the first card into the deck, and updates all the other card's time remaining
+    // EFFECTS: updates and reschedules the first card into the deck based on if it passed, and updates all the other card's time remaining
     // MODIFIES: this
     public void rescheduleDeck(boolean isPassed) {
         Card cardAnswered = cards.get(0);

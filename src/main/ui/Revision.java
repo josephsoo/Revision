@@ -44,7 +44,7 @@ public class Revision {
 
     }
 
-    // MODIFIES: this
+    // MODIFIES: this by calling other methods
     // EFFECTS: processes user command
     private void processCommand(String command) {
         command = command.toLowerCase();
