@@ -32,12 +32,12 @@ class JsonWriterTest extends persistence.JsonTest {
     void testWriterEmptyDecks() {
         try {
             ArrayList<Deck> decks = new ArrayList<Deck>();
-            JsonWriter writer = new JsonWriter("./data/testReaderEmptyDecks.json");
+            JsonWriter writer = new JsonWriter("./data/testWriterEmptyDecks.json");
             writer.open();
             writer.write(decks);
             writer.close();
 
-            JsonReader reader = new JsonReader("./data/testReaderEmptyDecks.json");
+            JsonReader reader = new JsonReader("./data/testWriterEmptyDecks.json");
             decks = reader.read();
             assertEquals(0, decks.size());
         } catch (IOException e) {
@@ -52,19 +52,21 @@ class JsonWriterTest extends persistence.JsonTest {
             Deck deck1 = new Deck("chem");
             Deck deck2 = new Deck("math");
             deck1.addCard(new Card("O", "oxygen"));
+            deck1.addCard(new Card("C", "carbon"));
             deck2.addCard(new Card("1+1", "2"));
+            deck2.addCard(new Card("1+2", "3"));
 
             decks.add(deck1);
             decks.add(deck2);
-            JsonWriter writer = new JsonWriter("./data/testReaderGeneralDecks.json");
+            JsonWriter writer = new JsonWriter("./data/testWriterGeneralDecks.json");
             writer.open();
             writer.write(decks);
             writer.close();
 
-            JsonReader reader = new JsonReader("./data/testReaderGeneralDecks.json");
+            JsonReader reader = new JsonReader("./data/testWriterGeneralDecks.json");
             decks = reader.read();
-            assertEquals("chem", decks.get(0).getDeckName());
-            assertEquals("math", decks.get(1).getDeckName());
+            checkDeck(deck1, decks.get(0));
+            checkDeck(deck2, decks.get(1));
 
 
         } catch (IOException e) {

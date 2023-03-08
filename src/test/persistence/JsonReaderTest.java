@@ -44,7 +44,10 @@ class JsonReaderTest extends JsonTest {
             Deck deck1Expected = new Deck("chem");
             Deck deck2Expected = new Deck("math");
             deck1Expected.addCard(new Card("O", "oxygen"));
+            deck1Expected.addCard(new Card("C", "carbon"));
             deck2Expected.addCard(new Card("1+1", "2"));
+            deck2Expected.addCard(new Card("1+2", "3"));
+
             checkDeck(deck1Expected, deck1);
             checkDeck(deck2Expected, deck2);
         } catch (IOException e) {
