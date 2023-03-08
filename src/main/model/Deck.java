@@ -1,12 +1,16 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.concurrent.ThreadLocalRandom;
 
 // Represents a Deck, which can be used to store Cards
-public class Deck {
+public class Deck implements Writable {
     private ArrayList<Card> cards;
     private String deckName;
     private static final int NUMANSWERS = 4;
@@ -60,7 +64,8 @@ public class Deck {
     }
 
     // REQUIRES: Deck is not empty (there is at least one card in the deck)
-    // EFFECTS: updates and reschedules the first card into the deck based on if it passed, and updates all the other card's time remaining
+    // EFFECTS: updates and reschedules the first card into the deck based on if it passed, and updates all the
+    // other card's time remaining
     // MODIFIES: this
     public void rescheduleDeck(boolean isPassed) {
         Card cardAnswered = cards.get(0);
@@ -116,6 +121,26 @@ public class Deck {
     // EFFECTS: returns true if the deck is empty
     public Boolean isEmpty() {
         return cards.size() == 0;
+    }
+
+    @Override
+    // EFFECTS: returns the deck in a JSON format
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("cards", cardsToJson());
+        json.put("deckName", deckName);
+        return json;
+    }
+
+    // EFFECTS: returns cards in this workroom as a JSON array
+    private JSONArray cardsToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Card c : cards) {
+            jsonArray.put(c.toJson());
+        }
+
+        return jsonArray;
     }
 
 }

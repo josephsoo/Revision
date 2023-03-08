@@ -2,20 +2,30 @@ package ui;
 
 import model.Card;
 import model.Deck;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.JsonReader;
+import persistence.JsonWriter;
+import persistence.Writable;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 // Spaced repetition flashcard application inspired by TellerApp https://github.students.cs.ubc.ca/CPSC210/TellerApp
 
-public class Revision {
-
+public class Revision implements Writable {
+    private static final String JSON_STORE = "./data/workroom.json";
     ArrayList<Deck> decks = new ArrayList<Deck>();
     private Scanner input;
-    ArrayList<String> allDeckNames = new ArrayList<>();
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
 
     // EFFECTS: Runs the Revision application
     public Revision() {
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
         runRevision();
     }
 
@@ -52,10 +62,16 @@ public class Revision {
             doSelectDeck();
         } else if (command.equals("a")) {
             doAddDeck();
+        } else if (command.equals("sa")) {
+            saveDecks();
+        } else if (command.equals("l")) {
+            loadDecks();
         } else {
             System.out.println("Selection not valid...");
         }
     }
+
+
 
     // MODIFIES: this
     // EFFECTS: initializes the system
@@ -69,6 +85,8 @@ public class Revision {
         System.out.println("\nSelect from:");
         System.out.println("\ts -> select deck");
         System.out.println("\ta -> add deck");
+        System.out.println("\tsa -> save decks");
+        System.out.println("\tl -> load decks");
         System.out.println("\tq -> quit");
     }
 
@@ -90,6 +108,10 @@ public class Revision {
         if (decks.size() == 0) {
             System.out.println("\nYou have no decks!");
         } else {
+            ArrayList<String> allDeckNames = new ArrayList<>();
+            for (Deck deck:decks) {
+                allDeckNames.add(deck.getDeckName());
+            }
             System.out.println("\nYour current decks are:");
             for (String name : allDeckNames) {
                 System.out.print(name + "\t");
@@ -99,9 +121,17 @@ public class Revision {
                 System.out.println("\nWhich deck do you wish to select?");
                 name = input.next();
             }
-            processDeck(name);
+            processDeck(name, allDeckNames);
 
         }
+    }
+
+    private ArrayList<String> getAllDeckNames() {
+        ArrayList<String> allDeckNames = new ArrayList<>();
+        for (Deck deck:decks) {
+            allDeckNames.add(deck.getDeckName());
+        }
+        return allDeckNames;
     }
 
 
@@ -110,7 +140,7 @@ public class Revision {
     // MODIFIES: this (by calling methods that modify this)
     // EFFECTS: allows the user select between rename, review, or delete the deck
     @SuppressWarnings("methodlength")
-    public void processDeck(String name) {
+    public void processDeck(String name, ArrayList<String> allDeckNames) {
         displayDeckMenu();
         String command;
         int i = allDeckNames.indexOf(name);
@@ -143,7 +173,6 @@ public class Revision {
         for (Card card: deck.getAllCards()) {
             System.out.println("Question: " + card.getQuestion());
             System.out.println("Answer: " + card.getAnswer());
-            System.out.println("ID: " + card.getId() + "\n");
         }
     }
 
@@ -172,7 +201,6 @@ public class Revision {
         System.out.println("Rename deck to:");
         String newName = input.next();
         deck.renameDeck(newName);
-        allDeckNames.set(i, newName);
     }
 
     // MODIFIES: deck
@@ -226,7 +254,6 @@ public class Revision {
     // REQUIRES: i is a valid index in decks
     // MODIFIES: this
     private void deleteDeck(int i) {
-        allDeckNames.remove(i);
         decks.remove(i);
     }
 
@@ -234,6 +261,7 @@ public class Revision {
     // EFFECTS: adds a deck for the user, making sure it is not a deck with a duplicate name
     private void doAddDeck() {
         System.out.println("What do you want to name your deck?");
+        ArrayList<String> allDeckNames = getAllDeckNames();
         Boolean keepGoing = true;
         String deckName = null;
         while (keepGoing) {
@@ -247,4 +275,46 @@ public class Revision {
         decks.add(new Deck(deckName));
         allDeckNames.add(deckName);
     }
+
+    // EFFECTS: returns things in this workroom as a JSON array
+    private JSONArray decksToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Deck d : decks) {
+            jsonArray.put(d.toJson());
+        }
+        return jsonArray;
+    }
+
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("decks", decksToJson());
+        return json;
+    }
+
+    // EFFECTS: saves the workroom to file
+    private void saveDecks() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(decks);
+            jsonWriter.close();
+            System.out.println("Saved decks to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads workroom from file
+    private void loadDecks() {
+        try {
+            decks = jsonReader.read();
+            System.out.println("Loaded decks from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
+    }
+
 }

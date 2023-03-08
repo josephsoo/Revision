@@ -14,11 +14,6 @@ class CardTest {
         card1 = new Card("question", "answer");
         card2 = new Card("question1", "answer1");
     }
-    @Test
-    public void cardIDTest() {
-        int card1ID = card1.getId();
-        assertEquals(card1ID + 1,card2.getId());
-    }
 
     @Test
     public void subtractTimeRemainingTest()

@@ -1,0 +1,20 @@
+{"decks": [
+    {
+        "cards": [{
+            "ease": 100,
+            "question": "O",
+            "answer": "oxygen",
+            "timeRemaining": 100
+        }],
+        "deckName": "chem"
+    },
+    {
+        "cards": [{
+            "ease": 100,
+            "question": "1+1",
+            "answer": "2",
+            "timeRemaining": 100
+        }],
+        "deckName": "math"
+    }
+]}
