@@ -23,3 +23,6 @@ ___
 - As a user, I want to be able to view the cards in a deck
 - As a user, I want to be able to save my decks and their cards to file (if I so choose)
 - As a user, I want to be able to be able to load my to-do list from file (if I so choose)
+
+Persistence was inspired by JsonSerializationDemo:
+https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
