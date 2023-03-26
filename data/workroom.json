@@ -1,36 +1,17 @@
-{"decks": [
-  {
+{"decks": [{
     "cards": [
-      {
-        "ease": 100,
-        "question": "O",
-        "answer": "oxygen",
-        "timeRemaining": 100
-      },
-      {
-        "ease": 100,
-        "question": "C",
-        "answer": "carbon",
-        "timeRemaining": 100
-      }
+        {
+            "ease": 100,
+            "question": "asdvc ",
+            "answer": "a fsd",
+            "timeRemaining": 100
+        },
+        {
+            "ease": 100,
+            "question": "zs xcv",
+            "answer": "s gdf",
+            "timeRemaining": 100
+        }
     ],
-    "deckName": "chem"
-  },
-  {
-    "cards": [
-      {
-        "ease": 100,
-        "question": "1+1",
-        "answer": "2",
-        "timeRemaining": 100
-      },
-      {
-        "ease": 100,
-        "question": "1+2",
-        "answer": "3",
-        "timeRemaining": 100
-      }
-    ],
-    "deckName": "math"
-  }
-]}
+    "deckName": "qwe rt"
+}]}

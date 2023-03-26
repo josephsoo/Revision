@@ -8,6 +8,7 @@ import org.json.JSONObject;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 import persistence.Writable;
+import ui.guitools.ModifyPopUp;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
@@ -25,15 +26,16 @@ import java.util.Scanner;
 
 public class GUI extends JFrame implements Writable, ActionListener, ListSelectionListener {
     private static final String JSON_STORE = "./data/workroom.json";
-    ArrayList<Deck> decks = new ArrayList<Deck>();
-    Deck currentDeck;
+    private static ArrayList<Deck> decks = new ArrayList<Deck>();
+    private Deck currentDeck;
     private Scanner input;
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
     public static final int WIDTH = 1000;
     public static final int HEIGHT = 700;
 
-    private JList<String> listOfDeckNamesModel;
+    private JList<String> listModel;
+    DefaultListModel<String> model;
 
     // EFFECTS: Runs the Revision application
     public GUI() {
@@ -46,7 +48,7 @@ public class GUI extends JFrame implements Writable, ActionListener, ListSelecti
 
     public void displaySplash() {
         JPanel splashPanel = new JPanel(new BorderLayout());
-        ImageIcon splashIcon = new ImageIcon("data/tobs.jpg");
+        ImageIcon splashIcon = new ImageIcon("data/app.jpg");
         JLabel splashLabel = new JLabel(splashIcon);
         splashPanel.add(splashLabel, BorderLayout.CENTER);
 
@@ -72,7 +74,7 @@ public class GUI extends JFrame implements Writable, ActionListener, ListSelecti
     // EFFECTS: processes user input. Inspired by TellerApp https://github.students.cs.ubc.ca/CPSC210/TellerApp
     //          class: TellerApp, method: runTellerApp
     public void runRevision() {
-        init();
+        initializeScanner();
         initializeGraphics();
 
     }
@@ -91,23 +93,13 @@ public class GUI extends JFrame implements Writable, ActionListener, ListSelecti
         add(makeNamesPanel(), BorderLayout.NORTH);
     }
 
-    public JPanel makeNamesPanel() {
-        JPanel namesPanel = new JPanel();
-        namesPanel.setLayout(new BoxLayout(namesPanel, BoxLayout.Y_AXIS));
+    public JScrollPane makeNamesPanel() {
+        model = new DefaultListModel<>();
+        listModel = new JList<>(model);
+        listModel.addListSelectionListener(this);
+        JScrollPane scrollPane = new JScrollPane(listModel);
+        return scrollPane;
 
-        // Add each name to the panel
-        for (String name : getAllDeckNames()) {
-            JLabel label = new JLabel(name);
-            label.addMouseListener(new MouseAdapter() {
-                public void mouseClicked(MouseEvent e) {
-                    // Handle mouse click on the label
-                    currentDeck = getDeck(name);
-                    System.out.println(name);
-                }
-            });
-            namesPanel.add(label);
-        }
-        return namesPanel;
     }
 
     // EFFECTS: returns a JPanel of the buttons on the bottom
@@ -123,7 +115,7 @@ public class GUI extends JFrame implements Writable, ActionListener, ListSelecti
         modifyDeck.setActionCommand("modifyDeck");
         modifyDeck.addActionListener(this);
         JButton addDeck = new JButton("Add Deck");
-        addDeck.setActionCommand("");
+        addDeck.setActionCommand("addDeck");
         addDeck.addActionListener(this);
         JButton reviewer = new JButton("Reviewer");
         reviewer.setActionCommand("reviewer");
@@ -131,6 +123,7 @@ public class GUI extends JFrame implements Writable, ActionListener, ListSelecti
         buttonPanel.add(loadDecks);
         buttonPanel.add(saveDecks);
         buttonPanel.add(modifyDeck);
+        buttonPanel.add(addDeck);
         buttonPanel.add(reviewer);
         return buttonPanel;
     }
@@ -138,7 +131,7 @@ public class GUI extends JFrame implements Writable, ActionListener, ListSelecti
 
     // MODIFIES: this
     // EFFECTS: initializes the system
-    private void init() {
+    private void initializeScanner() {
         input = new Scanner(System.in);
         input.useDelimiter("\n");
     }
@@ -162,6 +155,12 @@ public class GUI extends JFrame implements Writable, ActionListener, ListSelecti
         decks.remove(i);
     }
 
+    // EFFECTS: deletes the deck deck
+    // REQUIRES: deck is  in decks
+    // MODIFIES: this
+    public static void deleteDeck(Deck deck) {
+        decks.remove(deck);
+    }
 
     // EFFECTS: returns things in this workroom as a JSON array
     private JSONArray decksToJson() {
@@ -202,11 +201,38 @@ public class GUI extends JFrame implements Writable, ActionListener, ListSelecti
         try {
             decks = jsonReader.read();
             JOptionPane.showMessageDialog(null, "Loaded decks from " + JSON_STORE);
-            initializeGraphics();
+            updateListModel();
         } catch (IOException e) {
             System.out.println("Unable to read from file: " + JSON_STORE);
             JOptionPane.showMessageDialog(null, "Unable to read from file: " + JSON_STORE);
 
+        }
+    }
+
+    private void updateListModel() {
+        model.clear();
+        for (String name : getAllDeckNames()) {
+            model.addElement(name);
+        }
+    }
+
+    private void addDeck() {
+        String deckName = JOptionPane.showInputDialog("Enter the deck name");
+        if (deckName != null && !deckName.isEmpty() && !getAllDeckNames().contains(deckName)) {
+            model.addElement(deckName);
+            decks.add(new Deck(deckName));
+        } else {
+            JOptionPane.showMessageDialog(null, "Invalid Deck Name");
+
+        }
+    }
+
+    private void modifyDeck() {
+        if (currentDeck == null) {
+            JOptionPane.showMessageDialog(null, "No Deck Selected!");
+        } else {
+            new ModifyPopUp(currentDeck, this);
+            updateListModel();
         }
     }
 
@@ -220,7 +246,10 @@ public class GUI extends JFrame implements Writable, ActionListener, ListSelecti
                 saveDecks();
                 break;
             case "modifyDeck":
-                JOptionPane.showMessageDialog(null, "Button 3 clicked");
+                modifyDeck();
+                break;
+            case "addDeck":
+                addDeck();
                 break;
             case "reviewer":
                 JOptionPane.showMessageDialog(null, "Button 4 clicked");
@@ -239,6 +268,15 @@ public class GUI extends JFrame implements Writable, ActionListener, ListSelecti
 
     @Override
     public void valueChanged(ListSelectionEvent e) {
-
+        if (e.getValueIsAdjusting() == false) {
+            if (listModel.getSelectedIndex() == -1) {
+                // No selection, do nothing
+            } else {
+                // Do something with the selected item
+                String selected = listModel.getSelectedValue();
+                System.out.println("Selected: " + selected);
+                currentDeck = getDeck(selected);
+            }
+        }
     }
 }
