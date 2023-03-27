@@ -17,8 +17,8 @@ public class Reviewer implements ActionListener {
     JButton answer3;
     JButton answer4;
     JLabel questionLabel;
-    int WIDTH = 800;
-    int HEIGHT = 600;
+    private static final int WIDTH = 800;
+    private static final int HEIGHT = 600;
     Boolean firstTry;
     List<String> answers;
 
@@ -59,14 +59,7 @@ public class Reviewer implements ActionListener {
         answer4 = new JButton();
         buttonPanel.add(answer4);
 
-        answer1.addActionListener(this);
-        answer2.addActionListener(this);
-        answer3.addActionListener(this);
-        answer4.addActionListener(this);
-        answer1.setActionCommand("0");
-        answer2.setActionCommand("1");
-        answer3.setActionCommand("2");
-        answer4.setActionCommand("3");
+        setupButtons();
 
 
 
@@ -81,6 +74,19 @@ public class Reviewer implements ActionListener {
 
         updateButtons();
 
+    }
+
+    // MODIFIES: this
+    // EFFECTS: Sets up the button's action commands and action listeners
+    private void setupButtons() {
+        answer1.addActionListener(this);
+        answer2.addActionListener(this);
+        answer3.addActionListener(this);
+        answer4.addActionListener(this);
+        answer1.setActionCommand("0");
+        answer2.setActionCommand("1");
+        answer3.setActionCommand("2");
+        answer4.setActionCommand("3");
     }
 
     // MODIFIES: this
