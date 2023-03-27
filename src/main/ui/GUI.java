@@ -238,6 +238,7 @@ public class GUI extends JFrame implements Writable, ActionListener, ListSelecti
 
         }
     }
+
     // MODIFIES: this
     // EFFECTS: Makes a modify deck popup if there is a deck selected
     private void modifyDeck() {
@@ -279,8 +280,8 @@ public class GUI extends JFrame implements Writable, ActionListener, ListSelecti
             JOptionPane.showMessageDialog(null, "No Deck Selected!");
         } else {
             if (currentDeck.getAnswers().size() < 4) {
-                JOptionPane.showMessageDialog(null, "Not enough cards! (Requires at least 4 " +
-                        "cards)");
+                JOptionPane.showMessageDialog(null, "Not enough cards! (Requires at least 4 "
+                        + "cards)");
             } else {
                 new Reviewer(currentDeck);
             }
