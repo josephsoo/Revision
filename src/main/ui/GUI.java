@@ -29,7 +29,7 @@ import java.util.Scanner;
 public class GUI extends JFrame implements Writable, ActionListener, ListSelectionListener {
     private static final String JSON_STORE = "./data/workroom.json";
     private static ArrayList<Deck> decks = new ArrayList<Deck>();
-    private Deck currentDeck;
+    private static Deck currentDeck;
     private Scanner input;
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
@@ -38,8 +38,7 @@ public class GUI extends JFrame implements Writable, ActionListener, ListSelecti
 
     private JList<String> listModel;
     DefaultListModel<String> model;
-    private CardLayout cardLayout;
-    private JPanel cardPanel;
+
 
 
     // EFFECTS: Runs the Revision application
@@ -51,8 +50,8 @@ public class GUI extends JFrame implements Writable, ActionListener, ListSelecti
 
     }
 
-    // Modifies: this
-    // EFFECTS: creates a splash screen
+    // MODIFIES: this
+    // EFFECTS: creates a splash screen which will disappear when clicked
     public void displaySplash() {
         JPanel splashPanel = new JPanel(new BorderLayout());
         ImageIcon splashIcon = new ImageIcon("data/app.jpg");
@@ -155,18 +154,13 @@ public class GUI extends JFrame implements Writable, ActionListener, ListSelecti
     }
 
 
-    // EFFECTS: deletes the deck at index i
-    // REQUIRES: i is a valid index in decks
     // MODIFIES: this
-    private void deleteDeck(int i) {
-        decks.remove(i);
-    }
-
     // EFFECTS: deletes the deck deck
-    // REQUIRES: deck is  in decks
-    // MODIFIES: this
+    // REQUIRES: deck is in decks
     public static void deleteDeck(Deck deck) {
         decks.remove(deck);
+        currentDeck = null;
+
     }
 
     // EFFECTS: returns things in this workroom as a JSON array

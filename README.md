@@ -29,8 +29,8 @@ https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
 
 # Instructions for Grader
 
-- You can generate the first required action related to adding Xs to a Y by clicking the "Add Deck button"
-- You can generate the second required action related to adding Xs to a Y by...
-- You can locate my visual component by...
-- You can save the state of my application by...
-- You can reload the state of my application by...
+- You can generate the first required action related to adding Xs to a Y by clicking the "Add Deck button" and providing a non-empty string as a name
+- You can generate the second required action related to adding Xs to a Y by selecting (clicking on) a deck, then clicking the button "Modify Deck", then clicking "Rename deck", then providing a non-empty string as a name 
+- You can locate my visual component by opening the application (press anywhere to quit the splash screen)
+- You can save the state of my application by clicking on the "Save Decks" button
+- You can reload the state of my application by clicking on the "Load Decks" button

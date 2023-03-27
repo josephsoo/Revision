@@ -24,7 +24,7 @@ public class ModifyPopUp {
         switch (choice) {
             case 3:
                 String deckName = JOptionPane.showInputDialog("Enter the new deck name");
-                if (!(deckName == null)) {
+                if (!(deckName == null) && !(deckName == "")) {
                     selectedDeck.renameDeck(deckName);
                 }
                 break;
