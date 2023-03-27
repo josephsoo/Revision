@@ -9,6 +9,7 @@ import persistence.JsonReader;
 import persistence.JsonWriter;
 import persistence.Writable;
 import ui.guitools.ModifyPopUp;
+import ui.guitools.Reviewer;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
@@ -36,6 +37,9 @@ public class GUI extends JFrame implements Writable, ActionListener, ListSelecti
 
     private JList<String> listModel;
     DefaultListModel<String> model;
+    private CardLayout cardLayout;
+    private JPanel cardPanel;
+
 
     // EFFECTS: Runs the Revision application
     public GUI() {
@@ -137,8 +141,7 @@ public class GUI extends JFrame implements Writable, ActionListener, ListSelecti
     }
 
 
-
-
+    // EFFECTS: Returns the name of all the decks
     private ArrayList<String> getAllDeckNames() {
         ArrayList<String> allDeckNames = new ArrayList<>();
         for (Deck deck : decks) {
@@ -251,8 +254,20 @@ public class GUI extends JFrame implements Writable, ActionListener, ListSelecti
             case "addDeck":
                 addDeck();
                 break;
-            case "reviewer":
-                JOptionPane.showMessageDialog(null, "Button 4 clicked");
+            default:
+                reviewDeck();
+        }
+    }
+
+    private void reviewDeck() {
+        if (currentDeck == null) {
+            JOptionPane.showMessageDialog(null, "No Deck Selected!");
+        } else {
+            if (currentDeck.getAnswers().size() < 4) {
+                JOptionPane.showMessageDialog(null, "Not enough cards! (Requires at least 4 cards)");
+            } else {
+                new Reviewer(currentDeck);
+            }
         }
     }
 

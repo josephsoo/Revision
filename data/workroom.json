@@ -1,17 +1,1 @@
-{"decks": [{
-    "cards": [
-        {
-            "ease": 100,
-            "question": "asdvc ",
-            "answer": "a fsd",
-            "timeRemaining": 100
-        },
-        {
-            "ease": 100,
-            "question": "zs xcv",
-            "answer": "s gdf",
-            "timeRemaining": 100
-        }
-    ],
-    "deckName": "qwe rt"
-}]}
+{"decks": []}
