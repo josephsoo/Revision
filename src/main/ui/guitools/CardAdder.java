@@ -49,6 +49,9 @@ public class CardAdder extends JDialog implements ActionListener {
 
     }
 
+    // MODIFIES: this
+    // EFFECTS: listens to the add card button and guards against empty question and answers. Produces a warning if
+    // question or answer is empty
     @Override
     public void actionPerformed(ActionEvent e) {
         String question = this.question.getText();

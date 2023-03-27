@@ -126,6 +126,7 @@ public class Revision implements Writable {
         }
     }
 
+    // EFFECTS: returns the names of all cards in the deck
     private ArrayList<String> getAllDeckNames() {
         ArrayList<String> allDeckNames = new ArrayList<>();
         for (Deck deck:decks) {

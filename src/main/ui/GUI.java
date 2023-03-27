@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+// Graphical user interface for Revision
 public class GUI extends JFrame implements Writable, ActionListener, ListSelectionListener {
     private static final String JSON_STORE = "./data/workroom.json";
     private static ArrayList<Deck> decks = new ArrayList<Deck>();
@@ -50,6 +51,8 @@ public class GUI extends JFrame implements Writable, ActionListener, ListSelecti
 
     }
 
+    // Modifies: this
+    // EFFECTS: creates a splash screen
     public void displaySplash() {
         JPanel splashPanel = new JPanel(new BorderLayout());
         ImageIcon splashIcon = new ImageIcon("data/app.jpg");
@@ -97,6 +100,7 @@ public class GUI extends JFrame implements Writable, ActionListener, ListSelecti
         add(makeNamesPanel(), BorderLayout.NORTH);
     }
 
+    // Effects: constructs a JScrollPane, which will be used to show the deck names
     public JScrollPane makeNamesPanel() {
         model = new DefaultListModel<>();
         listModel = new JList<>(model);
@@ -176,6 +180,7 @@ public class GUI extends JFrame implements Writable, ActionListener, ListSelecti
     }
 
 
+    // EFFECTS: makes a json object with the decks
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
@@ -212,6 +217,8 @@ public class GUI extends JFrame implements Writable, ActionListener, ListSelecti
         }
     }
 
+    // Modifies: this
+    // Effects: updates model to fit all the current deck names
     private void updateListModel() {
         model.clear();
         for (String name : getAllDeckNames()) {
@@ -219,6 +226,8 @@ public class GUI extends JFrame implements Writable, ActionListener, ListSelecti
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: constructs a popup that allows the user to add a deck
     private void addDeck() {
         String deckName = JOptionPane.showInputDialog("Enter the deck name");
         if (deckName != null && !deckName.isEmpty() && !getAllDeckNames().contains(deckName)) {
@@ -229,7 +238,8 @@ public class GUI extends JFrame implements Writable, ActionListener, ListSelecti
 
         }
     }
-
+    // MODIFIES: this
+    // EFFECTS: Makes a modify deck popup if there is a deck selected
     private void modifyDeck() {
         if (currentDeck == null) {
             JOptionPane.showMessageDialog(null, "No Deck Selected!");
@@ -239,6 +249,8 @@ public class GUI extends JFrame implements Writable, ActionListener, ListSelecti
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: listens to the buttons
     @Override
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()) {
@@ -259,18 +271,24 @@ public class GUI extends JFrame implements Writable, ActionListener, ListSelecti
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: constructs a reviewer popup if there is a deck selected, and it has enough cards, otherwise produces a
+    // warning
     private void reviewDeck() {
         if (currentDeck == null) {
             JOptionPane.showMessageDialog(null, "No Deck Selected!");
         } else {
             if (currentDeck.getAnswers().size() < 4) {
-                JOptionPane.showMessageDialog(null, "Not enough cards! (Requires at least 4 cards)");
+                JOptionPane.showMessageDialog(null, "Not enough cards! (Requires at least 4 " +
+                        "cards)");
             } else {
                 new Reviewer(currentDeck);
             }
         }
     }
 
+    // REQUIRES: deckName is a valid name of a deck in decks
+    // EFFECTS: returns the Deck that matches the name
     public Deck getDeck(String deckName) {
         List<String> names = getAllDeckNames();
         for (int i = 0; i < names.size(); i++) {
@@ -281,15 +299,13 @@ public class GUI extends JFrame implements Writable, ActionListener, ListSelecti
         return null;
     }
 
+    // MODIFIES: this
+    // EFFECTS: sets the currentDeck to the deck selected in the names panel
     @Override
     public void valueChanged(ListSelectionEvent e) {
         if (e.getValueIsAdjusting() == false) {
-            if (listModel.getSelectedIndex() == -1) {
-                // No selection, do nothing
-            } else {
-                // Do something with the selected item
+            if (!(listModel.getSelectedIndex() == -1)) {
                 String selected = listModel.getSelectedValue();
-                System.out.println("Selected: " + selected);
                 currentDeck = getDeck(selected);
             }
         }
