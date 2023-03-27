@@ -8,6 +8,8 @@ import java.awt.event.ActionEvent;
 
 
 public class ModifyPopUp {
+
+    // EFFECTS: Constructs a modify popup for the given selected deck.
     public ModifyPopUp(Deck selectedDeck, JFrame parent) {
         // Create an array of options for the user to choose from
         String[] options = {"Cancel", "Delete Deck", "Add Cards", "Rename Deck"};
@@ -21,7 +23,7 @@ public class ModifyPopUp {
         switch (choice) {
             case 3:
                 String deckName = JOptionPane.showInputDialog("Enter the new deck name");
-                if (!(deckName == null) || !(deckName == "")) {
+                if (!(deckName == null) && !(deckName == "")) {
                     selectedDeck.renameDeck(deckName);
                 }
                 break;

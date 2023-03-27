@@ -14,6 +14,9 @@ public class CardAdder extends JDialog implements ActionListener {
     private JButton addCard;
     private Deck deck;
 
+    // MODIFIES: deck
+    // REQUIRES: parent is the main JFrame
+    // EFFECTS: Constructs a popup for adding cards
     CardAdder(Deck deck, JFrame parent) {
         super(parent, true);
         this.deck = deck;
