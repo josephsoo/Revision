@@ -8,6 +8,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+// Represents a popup to add cards
 public class CardAdder extends JDialog implements ActionListener {
     private JTextField question;
     private JTextField answer;
