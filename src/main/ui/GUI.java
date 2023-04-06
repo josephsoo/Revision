@@ -2,23 +2,21 @@ package ui;
 
 // Spaced repetition flashcard application inspired by TellerApp https://github.students.cs.ubc.ca/CPSC210/TellerApp
 
-import model.Deck;
+import model.*;
+import model.Event;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 import persistence.Writable;
-import ui.guitools.ModifyPopUp;
+import ui.guitools.ProcessPopUp;
 import ui.guitools.Reviewer;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -26,7 +24,7 @@ import java.util.List;
 import java.util.Scanner;
 
 // Graphical user interface for Revision
-public class GUI extends JFrame implements Writable, ActionListener, ListSelectionListener {
+public class GUI extends JFrame implements Writable, ActionListener, ListSelectionListener, WindowListener {
     private static final String JSON_STORE = "./data/workroom.json";
     private static ArrayList<Deck> decks = new ArrayList<Deck>();
     private static Deck currentDeck;
@@ -93,11 +91,13 @@ public class GUI extends JFrame implements Writable, ActionListener, ListSelecti
 
         setSize(WIDTH, HEIGHT);
         setLocationRelativeTo(null);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(this);
         setVisible(true);
         add(makeButtonPanel(), BorderLayout.SOUTH);
         add(makeNamesPanel(), BorderLayout.NORTH);
     }
+
 
     // Effects: constructs a JScrollPane, which will be used to show the deck names
     public JScrollPane makeNamesPanel() {
@@ -118,8 +118,8 @@ public class GUI extends JFrame implements Writable, ActionListener, ListSelecti
         JButton saveDecks = new JButton("Save Decks");
         saveDecks.setActionCommand("saveDecks");
         saveDecks.addActionListener(this);
-        JButton modifyDeck = new JButton("Modify Deck");
-        modifyDeck.setActionCommand("modifyDeck");
+        JButton modifyDeck = new JButton("Process Deck");
+        modifyDeck.setActionCommand("processDeck");
         modifyDeck.addActionListener(this);
         JButton addDeck = new JButton("Add Deck");
         addDeck.setActionCommand("addDeck");
@@ -235,11 +235,11 @@ public class GUI extends JFrame implements Writable, ActionListener, ListSelecti
 
     // MODIFIES: this
     // EFFECTS: Makes a modify deck popup if there is a deck selected
-    private void modifyDeck() {
+    private void processDeck() {
         if (currentDeck == null) {
             JOptionPane.showMessageDialog(null, "No Deck Selected!");
         } else {
-            new ModifyPopUp(currentDeck, this);
+            new ProcessPopUp(currentDeck, this);
             updateListModel();
         }
     }
@@ -255,8 +255,8 @@ public class GUI extends JFrame implements Writable, ActionListener, ListSelecti
             case "saveDecks":
                 saveDecks();
                 break;
-            case "modifyDeck":
-                modifyDeck();
+            case "processDeck":
+                processDeck();
                 break;
             case "addDeck":
                 addDeck();
@@ -304,5 +304,48 @@ public class GUI extends JFrame implements Writable, ActionListener, ListSelecti
                 currentDeck = getDeck(selected);
             }
         }
+    }
+
+    // EFFECTS: does nothing
+    @Override
+    public void windowOpened(WindowEvent e) {
+
+    }
+
+    // EFFECTS: prints out all the events
+    @Override
+    public void windowClosing(WindowEvent e) {
+        for (Event v : EventLog.getInstance()) {
+            System.out.println(v.toString());
+        }
+    }
+
+    // EFFECTS: does nothing
+    @Override
+    public void windowClosed(WindowEvent e) {
+
+    }
+
+    // EFFECTS: does nothing
+    @Override
+    public void windowIconified(WindowEvent e) {
+
+    }
+
+    // EFFECTS: does nothing
+    @Override
+    public void windowDeiconified(WindowEvent e) {
+    }
+
+    // EFFECTS: does nothing
+    @Override
+    public void windowActivated(WindowEvent e) {
+
+    }
+
+    // EFFECTS: does nothing
+    @Override
+    public void windowDeactivated(WindowEvent e) {
+
     }
 }

@@ -14,15 +14,17 @@ public class Deck implements Writable {
     private ArrayList<Card> cards;
     private String deckName;
     private static final int NUMANSWERS = 4;
+    private EventLog theLog = EventLog.getInstance();
 
     // EFFECTS: constructs an empty deck with no cards and a given name
     public Deck(String deckName) {
         this.deckName = deckName;
         cards = new ArrayList<>();
+        theLog.logEvent(new Event(getDeckName() + " was created"));
     }
 
     // EFFECTS: schedules the Card into cards by inserting it into the appropriate slot based on its time remaining
-    // MODIFIES: this
+    // MODIFIES: this, theLog
     public void addCard(Card card) {
         boolean inserted = false;
         int index = 0;
@@ -31,12 +33,15 @@ public class Deck implements Writable {
                 inserted = true;
                 cards.add(index, card);
                 break;
+
             }
             index++;
         }
         if (!inserted) {
             cards.add(card);
         }
+        theLog.logEvent(new Event(card.getQuestion() + " " + card.getAnswer()
+                + " was added to " + getDeckName()));
     }
 
     // REQUIRES: There is more than one card in the deck
@@ -76,6 +81,7 @@ public class Deck implements Writable {
         }
         cardAnswered.updateCard(isPassed);
         this.addCard(cardAnswered);
+
     }
 
     // EFFECTS: Returns true if the answer is correct (it matches the answer of the first card)
@@ -135,11 +141,9 @@ public class Deck implements Writable {
     // EFFECTS: returns cards in this workroom as a JSON array
     private JSONArray cardsToJson() {
         JSONArray jsonArray = new JSONArray();
-
         for (Card c : cards) {
             jsonArray.put(c.toJson());
         }
-
         return jsonArray;
     }
 

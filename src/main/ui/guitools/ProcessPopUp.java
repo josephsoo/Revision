@@ -4,16 +4,15 @@ import model.Deck;
 import ui.GUI;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
 
 // A popup to modify deck
-public class ModifyPopUp {
+public class ProcessPopUp {
 
     // MODIFIES: selectedDeck, parent
-    // EFFECTS: Constructs a modifypopup to let the user modify the selected deck
-    public ModifyPopUp(Deck selectedDeck, JFrame parent) {
+    // EFFECTS: Constructs a processpopup to let the user modify the selected deck
+    public ProcessPopUp(Deck selectedDeck, JFrame parent) {
         // Create an array of options for the user to choose from
-        String[] options = {"Cancel", "Delete Deck", "Add Cards", "Rename Deck"};
+        String[] options = {"Cancel", "Delete Deck", "Add Cards", "Rename Deck", "View Cards"};
 
 
         // Display the dialog box and get the user's choice
@@ -22,6 +21,9 @@ public class ModifyPopUp {
 
         // Handle the user's choice
         switch (choice) {
+            case 4:
+                new CardViewer(selectedDeck);
+                break;
             case 3:
                 String deckName = JOptionPane.showInputDialog("Enter the new deck name");
                 if (!(deckName == null) && !(deckName == "")) {
