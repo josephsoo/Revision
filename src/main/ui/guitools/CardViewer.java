@@ -16,6 +16,7 @@ public class CardViewer {
     private Deck selectedDeck;
     private JFrame frame;
 
+    // EFFECTS: Constructs a viewer to look at cards
     public CardViewer(Deck selectedDeck) {
         this.selectedDeck = selectedDeck;
         frame = new JFrame(selectedDeck.getDeckName());
@@ -24,6 +25,8 @@ public class CardViewer {
         frame.setSize(WIDTH, HEIGHT);
     }
 
+    // MODIFIES: this
+    // EFFECTS: constructs a names panel and adds all the cards to it
     public JScrollPane makeNamesPanel() {
         model = new DefaultListModel<>();
         listModel = new JList<>(model);
@@ -35,10 +38,11 @@ public class CardViewer {
 
     }
 
+    // EFFECTS: turns each card into a string with its question and answer
     public List<String> getCardData() {
         List<String> cards = new ArrayList<>();
         for (Card card : selectedDeck.getAllCards()) {
-            cards.add("Question: " + card.getQuestion() + " Answer:" + card.getAnswer());
+            cards.add("Question: " + card.getQuestion() + " Answer: " + card.getAnswer());
         }
         return cards;
     }

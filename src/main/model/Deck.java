@@ -40,7 +40,7 @@ public class Deck implements Writable {
         if (!inserted) {
             cards.add(card);
         }
-        theLog.logEvent(new Event(card.getQuestion() + " " + card.getAnswer()
+        theLog.logEvent(new Event("Question" + card.getQuestion() + " Answer: " + card.getAnswer()
                 + " was added to " + getDeckName()));
     }
 
