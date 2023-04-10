@@ -50,10 +50,10 @@ public class Card implements Writable {
     public void updateCard(Boolean isPassed) {
         if (isPassed) {
             this.ease *= passedMultiplier;
-            theLog.logEvent(new Event("Card with Question:" + getQuestion() + " Answer: " + getAnswer() + " passed!"));
+            theLog.logEvent(new Event("Card with Question: " + getQuestion() + " Answer: " + getAnswer() + " passed!"));
         } else {
             this.ease *= failedMultiplier;
-            theLog.logEvent(new Event("Card with Question:" + getQuestion() + " Answer: " + getAnswer() + " failed!"));
+            theLog.logEvent(new Event("Card with Question: " + getQuestion() + " Answer: " + getAnswer() + " failed!"));
 
         }
         this.timeRemaining = ease;

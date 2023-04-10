@@ -37,3 +37,39 @@ ___
 - You can locate my visual component by opening the application (press anywhere to quit the splash screen)
 - You can save the state of my application by clicking on the "Save Decks" button
 - You can reload the state of my application by clicking on the "Load Decks" button
+
+# Phase 4: Task 2
+___
+-	Mon Apr 10 09:05:05 PDT 2023
+-	CPSC210 was created
+-	Mon Apr 10 09:05:47 PDT 2023
+-	A card with Question: Private constructor, single instance field for class, public getter for said instance; Answer: Singleton pattern was added to CPSC210
+-	Mon Apr 10 09:06:12 PDT 2023
+-	A card with Question: This project's GUI was designed using; Answer: Java Swing was added to CPSC210
+-	Mon Apr 10 09:06:30 PDT 2023
+-	A card with Question: This phase is worth 20% of the final personal project; Answer: Phase 4 was added to CPSC210
+-	Mon Apr 10 09:06:46 PDT 2023
+-	A card with Question: This pattern has a Component, Composite, and leaf; Answer: Composite pattern was added to CPSC210
+-	Mon Apr 10 09:07:04 PDT 2023
+-	Card with Question: Private constructor, single instance field for class, public getter for said instance Answer: Singleton pattern failed!
+-	Mon Apr 10 09:07:04 PDT 2023
+-	A card with Question: Private constructor, single instance field for class, public getter for said instance; Answer: Singleton pattern was added to CPSC210
+-	Mon Apr 10 09:07:07 PDT 2023
+-	Card with Question: This project's GUI was designed using Answer: Java Swing failed!
+-	Mon Apr 10 09:07:07 PDT 2023
+-	A card with Question: This project's GUI was designed using; Answer: Java Swing was added to CPSC210
+-	Mon Apr 10 09:07:09 PDT 2023
+-	Card with Question: This phase is worth 20% of the final personal project Answer: Phase 4 passed!
+-	Mon Apr 10 09:07:09 PDT 2023
+-	A card with Question: This phase is worth 20% of the final personal project; Answer: Phase 4 was added to CPSC210
+-	Mon Apr 10 09:07:10 PDT 2023
+-	Card with Question: This pattern has a Component, Composite, and leaf Answer: Composite pattern passed!
+-	Mon Apr 10 09:07:10 PDT 2023
+-	A card with Question: This pattern has a Component, Composite, and leaf; Answer: Composite pattern was added to CPSC210
+-	Mon Apr 10 09:07:15 PDT 2023
+-	Card with Question: Private constructor, single instance field for class, public getter for said instance Answer: Singleton pattern failed!
+-	Mon Apr 10 09:07:15 PDT 2023
+-	A card with Question: Private constructor, single instance field for class, public getter for said instance; Answer: Singleton pattern was added to CPSC210
+
+Note: The way the reviewer is implmented is that when a card is reviewed, it is removed from the deck, 
+passed/failed, then it is added back into said deck. That is why you can see passed/failed in here.

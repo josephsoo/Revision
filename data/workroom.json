@@ -1,4 +1,29 @@
 {"decks": [{
-    "cards": [],
+    "cards": [
+        {
+            "ease": 90,
+            "question": "This project's GUI was designed using",
+            "answer": "Java Swing",
+            "timeRemaining": 0
+        },
+        {
+            "ease": 110,
+            "question": "This phase is worth 20% of the final personal project",
+            "answer": "Phase 4",
+            "timeRemaining": 20
+        },
+        {
+            "ease": 110,
+            "question": "This pattern has a Component, Composite, and leaf",
+            "answer": "Composite pattern",
+            "timeRemaining": 20
+        },
+        {
+            "ease": 81,
+            "question": "Private constructor, single instance field for class, public getter for said instance",
+            "answer": "Singleton pattern",
+            "timeRemaining": 81
+        }
+    ],
     "deckName": "CPSC210"
 }]}
