@@ -71,5 +71,10 @@ ___
 -	Mon Apr 10 09:07:15 PDT 2023
 -	A card with Question: Private constructor, single instance field for class, public getter for said instance; Answer: Singleton pattern was added to CPSC210
 
-Note: The way the reviewer is implmented is that when a card is reviewed, it is removed from the deck, 
-passed/failed, then it is added back into said deck. That is why you can see passed/failed in here.
+*Note: The way the reviewer is implemented is that when a card is reviewed, it is removed from the deck, 
+passed/failed, then it is added back into said deck. That is why you can the card being added back into the deck after it was reviewed, and passed or failed.*
+
+# Phase 4: Task 3
+
+The refactoring I would make to the application is to add a new class that is Decks, which would have a Collection of Deck as a field. This would allow the decks to be managed more by the model package,
+instead of it being partially managed by the ui. This would reduce the cohesion between the model and ui package.
