@@ -13,6 +13,7 @@ public class Card implements Writable {
     private final int startingEase = 100;
     protected final double passedMultiplier = 1.1;
     protected final double failedMultiplier = 0.9;
+    EventLog theLog = EventLog.getInstance();
 
     // EFFECTS: constructs a card with a given question and answer
     public Card(String question, String answer) {
@@ -49,8 +50,11 @@ public class Card implements Writable {
     public void updateCard(Boolean isPassed) {
         if (isPassed) {
             this.ease *= passedMultiplier;
+            theLog.logEvent(new Event("Card with Question:" + getQuestion() + " Answer: " + getAnswer() + " passed!"));
         } else {
             this.ease *= failedMultiplier;
+            theLog.logEvent(new Event("Card with Question:" + getQuestion() + " Answer: " + getAnswer() + " failed!"));
+
         }
         this.timeRemaining = ease;
     }

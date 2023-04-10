@@ -40,7 +40,7 @@ public class Deck implements Writable {
         if (!inserted) {
             cards.add(card);
         }
-        theLog.logEvent(new Event("Question" + card.getQuestion() + " Answer: " + card.getAnswer()
+        theLog.logEvent(new Event("A card with Question: " + card.getQuestion() + "; Answer: " + card.getAnswer()
                 + " was added to " + getDeckName()));
     }
 
@@ -97,7 +97,9 @@ public class Deck implements Writable {
     // EFFECTS: Changes the name of the deck to newDeckName
     // MODIFIES: this
     public void renameDeck(String newDeckName) {
+        theLog.logEvent(new Event("The deck " + deckName + " was renamed to: " + newDeckName));
         this.deckName = newDeckName;
+
     }
 
     //EFFECTS: Returns (a copy of) the deck's cards
