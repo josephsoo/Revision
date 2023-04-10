@@ -9,7 +9,6 @@ public class Card implements Writable {
     private String answer;
     private int ease;
     private int timeRemaining;
-    private static int nextCardID = 0;
     private final int startingEase = 100;
     protected final double passedMultiplier = 1.1;
     protected final double failedMultiplier = 0.9;
