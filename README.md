@@ -72,7 +72,7 @@ ___
 -	A card with Question: Private constructor, single instance field for class, public getter for said instance; Answer: Singleton pattern was added to CPSC210
 
 *Note: The way the reviewer is implemented is that when a card is reviewed, it is removed from the deck, 
-passed/failed, then it is added back into said deck. That is why you can the card being added back into the deck after it was reviewed, and passed or failed.*
+passed/failed, then it is added back into said deck. That is why you can see the card being added back into the deck after it was reviewed, which is indicated by passed or failed.*
 
 # Phase 4: Task 3
 
