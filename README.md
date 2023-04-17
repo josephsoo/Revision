@@ -77,4 +77,4 @@ passed/failed, then it is added back into said deck. That is why you can see the
 # Phase 4: Task 3
 
 The refactoring I would make to the application is to add a new class that is Decks, which would have a Collection of Deck as a field. This would allow the decks to be managed more by the model package,
-instead of it being partially managed by the ui. This would reduce the cohesion between the model and ui package.
+instead of it being partially managed by the ui. This would improve the cohesion between the model and ui package.
